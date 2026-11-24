@@ -13,21 +13,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Install system accessibility dependencies
+      - name: Install system accessibility packages
         run: |
           sudo apt-get update
-          sudo apt-get install -y libgirepository1.0-dev libcairo2-dev gir1.2-atspi-2.0 pkg-config python3-dev at-spi2-core
+          sudo apt-get install -y python3-gi gir1.2-atspi-2.0 at-spi2-core
 
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-          cache: "pip"
-
-      - name: Install Python dependencies
+      - name: Set up virtualenv with system site-packages
         run: |
-          python -m pip install --upgrade pip
-          pip install PyGObject
+          python3 -m venv --system-site-packages venv
+          echo "$GITHUB_WORKSPACE/venv/bin" >> $GITHUB_PATH
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
           pip install -e ".[dev]"
 
       - name: Run test suite (unit, component, and stdio e2e)
