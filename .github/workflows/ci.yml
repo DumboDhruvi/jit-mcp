@@ -13,15 +13,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install system accessibility dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgirepository1.0-dev libcairo2-dev gir1.2-atspi-2.0 pkg-config python3-dev at-spi2-core
+
       - name: Set up Python 3.12
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
           cache: "pip"
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install PyGObject
           pip install -e ".[dev]"
 
       - name: Run test suite (unit, component, and stdio e2e)
