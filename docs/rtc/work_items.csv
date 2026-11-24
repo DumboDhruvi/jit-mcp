@@ -1,0 +1,15 @@
+id,slice,title,owner_files,dependencies,status,dod_checked
+WI-001,foundation,Project scaffolding Apache-2.0 LICENSE and package configuration,LICENSE;pyproject.toml;src/jit_mcp/__init__.py,,done,true
+WI-002,models,Core domain models UiBounds ScanResult and ToolSpec schema types,src/jit_mcp/models.py,WI-001,done,true
+WI-003,adapter,AccessibilityAdapter protocol semantic actions mouse_path and exceptions,src/jit_mcp/adapters/__init__.py;src/jit_mcp/adapters/base.py,WI-002,done,true
+WI-004,adapter,Linux gi.repository.Atspi adapter states UiBounds and mouse_path fallback,src/jit_mcp/adapters/atspi2.py,WI-003,done,true
+WI-005,scanner,Live UI Scanner compact LLM view hidden UiBounds registry and budgets,src/jit_mcp/scanner.py,WI-003,done,true
+WI-006,safety,Safety Guardrail risk classifier and confirmation gate,src/jit_mcp/safety.py,WI-002,done,true
+WI-007,cache,ToolSpec disk cache and JSON Schema validator,src/jit_mcp/cache.py,WI-002,done,true
+WI-008,compiler,Pluggable CompilerBackend for verified multi-step workflow ToolSpecs,src/jit_mcp/compiler.py,WI-002;WI-005;WI-006,done,true
+WI-009,executor,Semantic and coordinate fallback executor enabled guard and draw_path,src/jit_mcp/executor.py,WI-003;WI-005;WI-006,done,true
+WI-010,server,FastMCP Meta-Server live-scan action tools dynamic workflows and CLI,src/jit_mcp/server.py,WI-004;WI-005;WI-007;WI-008;WI-009,done,true
+WI-011,docs,Human-facing README and 60-second Quickstart guide,README.md;docs/quickstart.md,WI-010,done,true
+WI-012,tests-unit,Shared test fixtures and Level 1 unit test suite,tests/conftest.py;tests/unit/,WI-010,done,true
+WI-013,tests-component,Level 2 component integration test suite,tests/component/,WI-012,done,true
+WI-014,tests-e2e,Level 3 E2E test suite and live X11 AT-SPI2 GTK3 smoke test,tests/e2e/,WI-012,done,true

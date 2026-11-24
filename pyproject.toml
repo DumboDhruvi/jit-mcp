@@ -1,0 +1,31 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "jit-mcp"
+version = "0.1.0"
+description = "Just-In-Time Model Context Protocol Server for GUI & Desktop Automation"
+requires-python = ">=3.12"
+license = "Apache-2.0"
+dependencies = [
+    "mcp",
+    "pydantic>=2.0",
+    "jsonschema>=4.20",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff",
+]
+
+[project.scripts]
+jit-mcp = "jit_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/jit_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
